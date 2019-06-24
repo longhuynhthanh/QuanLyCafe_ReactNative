@@ -1,4 +1,4 @@
-import React, { useMemo, useCallback } from 'react';
+import React, { useMemo } from 'react';
 import { List, View } from 'native-base';
 import { ListView } from 'react-native';
 import ItemDish from './ItemDish/ItemDish';
@@ -20,10 +20,10 @@ function Home() {
     const ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 });
 
     //#region Function
-    const EditDish = useCallback((newDish) => {
+    const EditDish = useMemo((newDish) => {
         return EditDishRequest(dispatch, newDish);
     }, [dispatch]);
-    const AddDish = useCallback((dish) => {
+    const AddDish = useMemo((dish) => {
         return AddDishrequest(dispatch, dish);
     }, [dispatch]);
     //#endregion

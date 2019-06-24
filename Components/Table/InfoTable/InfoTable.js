@@ -5,12 +5,14 @@ import ShowOrder from './ShowOrder';
 import { FetchAllDishRequest } from '../../../Actions/Home';
 import Reducer, { initialState } from '../../../Reducer/Order';
 import { OrderContext, OrderDispatchContext } from '../../../Contexts/Order';
-
+import {FetchAllOrderByIDTable, FetchAllOrder} from '../../../Actions/Order';
 function InfoTable(props) {
     const [orderState, orderDispatch] = useReducer(Reducer, initialState);
     const { navigation } = props;
     const [dishes, setDishes] = useState([]);
     const table = navigation.getParam('table');
+
+    //#region FetchAll Dishes
     useMemo(() => {
         const FetchAll = () => {
             return FetchAllDishRequest().then(result => {
@@ -19,11 +21,24 @@ function InfoTable(props) {
         }
         FetchAll();
     }, [dishes]);
+    //#endregion
+
+    //#region FetchAll Foods By IDTable
+    useMemo(() => {
+        const FetchAllFoodsByIDTable = () => {
+            return FetchAllOrderByIDTable(table.id)
+            .then(result => orderDispatch(FetchAllOrder(result)));
+        }
+        FetchAllFoodsByIDTable();
+    }, [orderState.foods]);
+    //#endregion
+
     const elm = dishes.map((item, index) => {
         return <InfoTableItem
             key={index}
             item={item}
             table={table}
+            foods={orderState.foods}
         />;
     });
     return (

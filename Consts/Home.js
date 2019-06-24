@@ -1,6 +1,9 @@
 //#region URL
 export const URL = 'https://5cff19acd691540014b0d841.mockapi.io/';
 //#endregion
+//#region NewURL
+export const NEW_URL = 'https://testapi.io/api/longhuynhthanh/';
+//#endregion
 
 
 //#region Fetch All Dish

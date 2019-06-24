@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import { Button, Text, View, Icon, Form, Item } from 'native-base';
 import { Modal, Alert, TextInput } from 'react-native';
 function EditDish(props) {
@@ -18,7 +18,7 @@ function EditDish(props) {
     //#endregion
     return (
         <View style={{ marginTop: 15 }}>
-            <Button full success onPress={() => setModalVisible(true)}>
+            <Button full success onPress={useCallback(() => setModalVisible(true), [modalVisible])}>
                 <Icon active name="information-circle" />
             </Button>
             <Modal
@@ -32,26 +32,24 @@ function EditDish(props) {
                     <Form>
                         <Item>
                             <Icon name='image' />
-                            <TextInput placeholder="Image URL" value={imageURL} onChangeText={(text) => setImageURL(text)} />
+                            <TextInput placeholder="Image URL" value={imageURL} onChangeText={useCallback((text) => setImageURL(text), [imageURL])} />
                         </Item>
                         <Item>
                             <Icon name='person' />
-                            <TextInput placeholder="Name...." value={name}  onChangeText={(text) => setName(text)} />
+                            <TextInput placeholder="Name...." value={name}  onChangeText={useCallback((text) => setName(text), [name])} />
                         </Item>
                         <Item>
                             <Icon type="FontAwesome5" name='file-import' />
-                            <TextInput placeholder="Description...." value={description} onChangeText={(text) => setDescription(text)} />
+                            <TextInput placeholder="Description...." value={description} onChangeText={useCallback((text) => setDescription(text), [description])} />
                         </Item>
                         <Item>
                             <Icon type="FontAwesome5" name="file-invoice-dollar" />
-                            <TextInput placeholder="Price...." value={`${price}`} onChangeText={(text) => setPrice(text)}/>
+                            <TextInput placeholder="Price...." value={`${price}`} onChangeText={useCallback((text) => setPrice(text), [price])}/>
                         </Item>
                     </Form>
                     <View style={{flexDirection:"row", alignSelf:"center", marginTop:15}}>
                         <Button primary
-                            onPress={() => {
-                                setModalVisible(false);
-                            }} style={{marginRight:10}}>
+                            onPress={useCallback(() => setModalVisible(false), [modalVisible])} style={{marginRight:10}}>
                             <Text>Close</Text>
                         </Button>
                         <Button danger

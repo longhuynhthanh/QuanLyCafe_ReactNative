@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import { Fab, Icon, View, Form, Button, Text, Item } from 'native-base';
 import { Modal, Alert, TextInput } from 'react-native';
 function AddTable(props) {
-    const {AddTable} = props;
+    const { AddTable } = props;
     const [active, setActive] = useState(true);
     const [name, setName] = useState('');
     const [modalVisible, setModalVisible] = useState(false);
@@ -11,12 +11,12 @@ function AddTable(props) {
             <Fab
                 active={active}
                 direction="up"
-                style={{ backgroundColor: '#B00020', shadowColor:'#FF0266' }}
+                style={{ backgroundColor: '#B00020', shadowColor: '#FF0266' }}
                 position="bottomRight"
-                onPress={() => {
+                onPress={useCallback(() => {
                     setModalVisible(true);
                     setActive(!active);
-                }}
+                })}
             >
                 <Icon name="add" />
             </Fab>
@@ -31,22 +31,20 @@ function AddTable(props) {
                     <Form>
                         <Item>
                             <Icon name='table' type='FontAwesome5' />
-                            <TextInput placeholder="Name...." value={name} onChangeText={(text) => setName(text)} />
+                            <TextInput placeholder="Name...." value={name} onChangeText={useCallback((text) => setName(text))} />
                         </Item>
                     </Form>
                     <View style={{ flexDirection: "row", alignSelf: "center", marginTop: 15 }}>
                         <Button danger
-                            onPress={() => {
-                                setModalVisible(false);
-                            }} style={{ marginRight: 10 }}>
+                            onPress={useCallback(() => setModalVisible(false))} style={{ marginRight: 10 }}>
                             <Text>Close</Text>
                         </Button>
-                        <Button success 
-                            onPress={() => {
-                                const table = {name, status: false};
+                        <Button success
+                            onPress={useCallback(() => {
+                                const table = { name, status: false };
                                 AddTable(table);
                                 setModalVisible(false);
-                            }} style={{ marginLeft: 10 }}>
+                            })} style={{ marginLeft: 10 }}>
                             <Text>Save</Text>
                         </Button>
                     </View>

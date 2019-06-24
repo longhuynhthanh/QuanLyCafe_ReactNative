@@ -9,7 +9,7 @@ import LoginScreen from '../Pages/Login';
 import RegisterScreen from '../Pages/Register';
 import ForgotPasswordScreen from '../Pages/ForgotPassword';
 //#region Component
-import InfoTable from '../Components/Table/InfoTable/InfoTable';
+import InfoTableScreen from '../Components/Table/InfoTable/InfoTable';
 //#endregion
 
 //#region Home
@@ -29,7 +29,7 @@ const HomeStack = createStackNavigator(
 const TableStack = createStackNavigator(
     {
         Table: TableScreen,
-        InfoTable: InfoTable
+        InfoTable: InfoTableScreen
     },
     {
         headerMode: 'none',

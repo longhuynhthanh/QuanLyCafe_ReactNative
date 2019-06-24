@@ -8,3 +8,4 @@ const callAPI = async(method, endpoint, data) => {
     }).catch(err => console.log(err));
 }
 export default callAPI;
+

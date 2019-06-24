@@ -1,11 +1,11 @@
-import React, {useCallback} from 'react';
+import React, {useMemo} from 'react';
 import {Button, Icon} from 'native-base';
 import {useDispatch} from '../../../Contexts/Home';
 import {DeleteDishRequest} from '../../../Actions/Home';
 function DeleteDish(props) {
     const {id, secId, rowId, rowMap} = props;
     const dispatch = useDispatch();
-    const deleteRow =  useCallback((secId, rowId, rowMap, id) => {
+    const deleteRow =  useMemo((secId, rowId, rowMap, id) => {
         rowMap[`${secId}${rowId}`].props.closeRow();
         return DeleteDishRequest(dispatch, id);
     }, [dispatch]);
@@ -15,5 +15,4 @@ function DeleteDish(props) {
         </Button>
     );
 }
-
 export default DeleteDish;

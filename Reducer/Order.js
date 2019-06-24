@@ -10,6 +10,9 @@ export const initialState = {
 // ]
 const Reducer = (state = initialState, action) => {
     switch (action.type) {
+        case TYPES.FETCH_ALL_ORDER: {
+            return {...state, foods: action.foods};
+        }
         case TYPES.ADD_FOOD: {
             const index = state.foods.findIndex(item => item.food.id === action.food.id);
             if (index !== -1) {

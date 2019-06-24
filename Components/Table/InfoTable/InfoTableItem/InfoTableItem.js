@@ -1,12 +1,23 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import { AddFood, MinusFood } from '../../../../Actions/Order';
 import { EditTableRequest } from '../../../../Actions/Table';
 import { useOrderDispatch } from '../../../../Contexts/Order';
 import { ListItem, Left, Thumbnail, Body, Text, Right, Button } from 'native-base';
 function InfoTableItem(props) {
-    const { item, table } = props;
+    const { item, table, foods } = props;
     const [count, setCount] = useState(0);
     const orderDispatch = useOrderDispatch();
+
+    useMemo(() => {
+        if (foods.length > 0) {
+            for (let index = 0; index < foods.length; index++) {
+                if (item.id === foods[index].food.id) {
+                    setCount(foods[index].count);
+                    break;
+                }
+            }
+        }
+    }, [foods]);
     //#region Function
     const handleAddFood = () => {
         setCount(count + 1);
@@ -24,6 +35,7 @@ function InfoTableItem(props) {
             return EditTableRequest(editTable);
         }
     }
+
     //#endregion
     return (
         <ListItem thumbnail>

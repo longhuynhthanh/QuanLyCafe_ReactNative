@@ -1,4 +1,4 @@
-import React, { useMemo, useCallback } from 'react';
+import React, { useMemo } from 'react';
 import { List } from 'native-base';
 import { ListView } from 'react-native';
 import { useGlobalState, useDispatch } from '../../Contexts/Table';
@@ -18,10 +18,10 @@ function Table(props) {
         FetchAll();
     }, [state.tables]);
     //#region Function
-    const AddTable = useCallback((table) => {
+    const AddTable = useMemo((table) => {
         return AddTableRequest(dispatch, table);
     }, [dispatch]);
-    const EditTable = useCallback((table) => {
+    const EditTable = useMemo((table) => {
         return EditTableRequest(table).then(res => dispatch(EditTable(table)));
     }, [dispatch]);
     //#endregion
