@@ -20,17 +20,17 @@ function Home() {
     const ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 });
 
     //#region Function
-    const EditDish = useMemo((newDish) => {
+    const EditDish = (newDish) => {
         return EditDishRequest(dispatch, newDish);
-    }, [dispatch]);
-    const AddDish = useMemo((dish) => {
+    };
+    const AddDish = (dish) => {
         return AddDishrequest(dispatch, dish);
-    }, [dispatch]);
+    };
     //#endregion
     return (
-        <View style={{flex:1}}>
+        <View style={{ flex: 1 }}>
             <List
-                style={{marginBottom:20}}
+                style={{ marginBottom: 20 }}
                 leftOpenValue={75}
                 rightOpenValue={-75}
                 dataSource={ds.cloneWithRows(state.dishes)}

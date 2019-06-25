@@ -10,6 +10,7 @@ import RegisterScreen from '../Pages/Register';
 import ForgotPasswordScreen from '../Pages/ForgotPassword';
 //#region Component
 import InfoTableScreen from '../Components/Table/InfoTable/InfoTable';
+import InfoUserScreen from '../Components/Contact/InfoUser/infoUser';
 //#endregion
 
 //#region Home
@@ -56,7 +57,8 @@ const NavigateStack = createStackNavigator(
 //#region Contact
 const ContactStack = createStackNavigator(
     {
-        Contact: ContactScreen
+        Contact: ContactScreen,
+        InfoUser: InfoUserScreen
     },
     {
         headerMode: 'none',

@@ -1,40 +1,39 @@
 import React, { useState, useMemo } from 'react';
 import { AddFood, MinusFood } from '../../../../Actions/Order';
 import { EditTableRequest } from '../../../../Actions/Table';
-import { useOrderDispatch } from '../../../../Contexts/Order';
+import { useOrderDispatch, useOrderState } from '../../../../Contexts/Order';
 import { ListItem, Left, Thumbnail, Body, Text, Right, Button } from 'native-base';
 function InfoTableItem(props) {
-    const { item, table, foods } = props;
+    const { item, table } = props;
     const [count, setCount] = useState(0);
     const orderDispatch = useOrderDispatch();
-
+    const orderState = useOrderState();
     useMemo(() => {
-        if (foods.length > 0) {
-            for (let index = 0; index < foods.length; index++) {
-                if (item.id === foods[index].food.id) {
-                    setCount(foods[index].count);
-                    break;
-                }
-            }
-        }
-    }, [foods]);
-    //#region Function
-    const handleAddFood = () => {
-        setCount(count + 1);
-        orderDispatch(AddFood(item));
         if (count === 1) {
             const editTable = { id: table.id, name: table.name, status: true };
             return EditTableRequest(editTable);
         }
-    };
-    const handleMinusFood = () => {
-        setCount(count - 1);
-        orderDispatch(MinusFood(item));
         if (count === 0) {
             const editTable = { id: table.id, name: table.name, status: false };
             return EditTableRequest(editTable);
         }
-    }
+    }, [count]);
+    const handleAddFood = () => {
+        setCount(count + 1);
+        orderDispatch(AddFood(item));
+    };
+    const handleMinusFood = () => {
+        setCount(count - 1);
+        orderDispatch(MinusFood(item));
+    };
+    useMemo(() => {
+        for (let index = 0; index < orderState.foods.length; index++) {
+            if (item.id === orderState.foods[index].food.id) {
+                setCount(orderState.foods[index].count);
+                break;
+            }
+        }
+    }, [orderState.foods])
 
     //#endregion
     return (

@@ -1,10 +1,9 @@
 import React from 'react';
-import {View, Text} from 'native-base';
-function Contact(){
+import ContactComponent from '../Components/Contact/Contact';
+function Contact(props){
+    const {navigation} = props;
     return (
-        <View style={{flex:1, justifyContent:'center', alignItems:'center'}}>
-            <Text>Contact</Text>
-        </View>
+        <ContactComponent navigation={navigation} />
     );
 }
 export default Contact;

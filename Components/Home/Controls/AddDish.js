@@ -1,14 +1,17 @@
 import React, { useState, useCallback } from 'react';
 import { Fab, Icon, View, Form, Button, Text, Item } from 'native-base';
 import { Modal, Alert, TextInput } from 'react-native';
+import useInputValue from '../../../utils/UseInputValue';
+
 function AddDish(props) {
     const { AddDish } = props;
     const [active, setActive] = useState(true);
-    const [imageURL, setImageURL] = useState('');
-    const [name, setName] = useState('');
-    const [description, setDescription] = useState('');
+
     const [price, setPrice] = useState(0);
     const [modalVisible, setModalVisible] = useState(false);
+    const imageURL = useInputValue('');
+    const name = useInputValue('');
+    const description = useInputValue('');
     return (
         <React.Fragment>
             <Fab
@@ -34,15 +37,15 @@ function AddDish(props) {
                     <Form>
                         <Item>
                             <Icon name='image' />
-                            <TextInput placeholder="Image URL" value={imageURL} onChangeText={useCallback((text) => setImageURL(text), [imageURL])} />
+                            <TextInput placeholder="Image URL" {...imageURL} />
                         </Item>
                         <Item>
                             <Icon name='person' />
-                            <TextInput placeholder="Name...." value={name} onChangeText={useCallback((text) => setName(text), [name])} />
+                            <TextInput placeholder="Name...." {...name} />
                         </Item>
                         <Item>
                             <Icon type="FontAwesome5" name='file-import' />
-                            <TextInput placeholder="Description...." value={description} onChangeText={useCallback((text) => setDescription(text), [description])} />
+                            <TextInput placeholder="Description...." {...description} />
                         </Item>
                         <Item>
                             <Icon type="FontAwesome5" name="file-invoice-dollar" />
@@ -56,7 +59,7 @@ function AddDish(props) {
                         </Button>
                         <Button success
                             onPress={useCallback(() => {
-                                const dish = { imageURL, name, description, price: parseInt(price, 10) };
+                                const dish = { imageURL: imageURL.value, name: name.value, description: description.value, price: parseInt(price, 10) };
                                 AddDish(dish);
                                 setModalVisible(false);
                             }, [modalVisible])} style={{ marginLeft: 10 }}>

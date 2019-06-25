@@ -1,11 +1,12 @@
 import React, { useState, useCallback } from 'react';
 import { Fab, Icon, View, Form, Button, Text, Item } from 'native-base';
 import { Modal, Alert, TextInput } from 'react-native';
+import useInputValue from '../../../utils/UseInputValue';
 function AddTable(props) {
     const { AddTable } = props;
     const [active, setActive] = useState(true);
-    const [name, setName] = useState('');
     const [modalVisible, setModalVisible] = useState(false);
+    const name = useInputValue('');
     return (
         <React.Fragment>
             <Fab
@@ -16,7 +17,7 @@ function AddTable(props) {
                 onPress={useCallback(() => {
                     setModalVisible(true);
                     setActive(!active);
-                })}
+                }, [active, modalVisible])}
             >
                 <Icon name="add" />
             </Fab>
@@ -31,20 +32,20 @@ function AddTable(props) {
                     <Form>
                         <Item>
                             <Icon name='table' type='FontAwesome5' />
-                            <TextInput placeholder="Name...." value={name} onChangeText={useCallback((text) => setName(text))} />
+                            <TextInput placeholder="Name...." {...name} />
                         </Item>
                     </Form>
                     <View style={{ flexDirection: "row", alignSelf: "center", marginTop: 15 }}>
                         <Button danger
-                            onPress={useCallback(() => setModalVisible(false))} style={{ marginRight: 10 }}>
+                            onPress={useCallback(() => setModalVisible(false), [modalVisible])} style={{ marginRight: 10 }}>
                             <Text>Close</Text>
                         </Button>
                         <Button success
                             onPress={useCallback(() => {
-                                const table = { name, status: false };
+                                const table = { name: name.value, status: false };
                                 AddTable(table);
                                 setModalVisible(false);
-                            })} style={{ marginLeft: 10 }}>
+                            }, [modalVisible])} style={{ marginLeft: 10 }}>
                             <Text>Save</Text>
                         </Button>
                     </View>

@@ -18,12 +18,12 @@ function Table(props) {
         FetchAll();
     }, [state.tables]);
     //#region Function
-    const AddTable = useMemo((table) => {
+    const AddTable =(table) => {
         return AddTableRequest(dispatch, table);
-    }, [dispatch]);
-    const EditTable = useMemo((table) => {
+    };
+    const EditTable2 = (table) => {
         return EditTableRequest(table).then(res => dispatch(EditTable(table)));
-    }, [dispatch]);
+    };
     //#endregion
     return (
         <React.Fragment>
@@ -34,7 +34,7 @@ function Table(props) {
                 renderRow={data =>
                     <ItemTable
                         Table={data} navigation={props.navigation} />}
-                renderLeftHiddenRow={data => <Edit data={data} EditTable={EditTable} /> }
+                renderLeftHiddenRow={data => <Edit data={data} EditTable={EditTable2} /> }
                 renderRightHiddenRow={(data, secId, rowId, rowMap) =>
                     <Delete id={data.id} secId={secId} rowId={rowId} rowMap={rowMap} />}
             />

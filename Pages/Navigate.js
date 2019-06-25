@@ -1,10 +1,8 @@
 import React from 'react';
-import {View, Text} from 'native-base';
+import NavigateComponent from '../Components/Navigate/Navigate';
 function Navigate(){
     return (
-        <View style={{flex:1, justifyContent:'center', alignItems:'center'}}>
-            <Text>Navigate</Text>
-        </View>
+        <NavigateComponent />
     );
 }
 export default Navigate;
