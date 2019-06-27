@@ -1,13 +1,7 @@
-import React, { useMemo } from 'react';
+import React, { useMemo, useCallback } from 'react';
 import { FetchAll } from '../Actions/Login';
 import useInputvalue from '../utils/UseInputValue';
-import {
-    View,
-    TextInput,
-    TouchableHighlight,
-    Image,
-    ImageBackground
-} from 'react-native';
+import { View, TextInput, TouchableHighlight, Image, ImageBackground } from 'react-native';
 import { Button, Text } from 'native-base';
 import styles from '../public/style/index';
 export default function Login(props) {
@@ -16,7 +10,7 @@ export default function Login(props) {
 
     const newUser = props.navigation.getParam('user');
 
-    const handleLogin = () => {
+    const handleLogin = useCallback(() => {
         const setLogin = () => {
             return FetchAll().then(result => {
                 for (let index = 0; index < result.length; index++) {
@@ -31,7 +25,7 @@ export default function Login(props) {
             })
         }
         setLogin();
-    };
+    }, [userName.value, password.value]);
 
     useMemo(() => {
         if (newUser) {

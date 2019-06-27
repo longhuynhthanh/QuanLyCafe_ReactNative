@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import {
     View,
     TextInput,
@@ -17,7 +17,7 @@ export default function Register(props) {
     const phone = useInputValue('');
 
 
-    const handleRegist = () => {
+    const handleRegist = useCallback(() => {
         if (userName.value === '' || password.value === '' || rePassword.value === '' || phone.value === '') {
             alert('Vui Lòng Đừng Để Trống Thông Tin');
         } else {
@@ -41,7 +41,7 @@ export default function Register(props) {
                 });
             }
         }
-    };
+    }, [userName.value, password.value, rePassword.value, phone.value]);
     return (
         <ImageBackground source={require('../public/images/bg2.jpg')} style={styles.container}>
             <View style={styles.inputContainer}>

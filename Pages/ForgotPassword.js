@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import {
     View,
     TextInput,
@@ -14,7 +14,7 @@ export default function ForgotPassword(props) {
     const userName = useInputValue('');
     const phone = useInputValue('');
 
-    const handleCheck = () => {
+    const handleCheck = useCallback(() => {
         if (userName.value === '' || phone.value === '') {
             alert('Đừng Để Trống, Vui Lòng Kiểm Tra lại');
         } else {
@@ -31,7 +31,7 @@ export default function ForgotPassword(props) {
             }
             Check();
         }
-    };
+    }, [userName.value, phone.value]);
     return (
         <ImageBackground source={require('../public/images/bg2.jpg')} style={styles.container}>
             <View style={styles.inputContainer}>

@@ -18,7 +18,7 @@ function Table(props) {
         FetchAll();
     }, [state.tables]);
     //#region Function
-    const AddTable =(table) => {
+    const AddTable = (table) => {
         return AddTableRequest(dispatch, table);
     };
     const EditTable2 = (table) => {
@@ -34,7 +34,7 @@ function Table(props) {
                 renderRow={data =>
                     <ItemTable
                         Table={data} navigation={props.navigation} />}
-                renderLeftHiddenRow={data => <Edit data={data} EditTable={EditTable2} /> }
+                renderLeftHiddenRow={data => <Edit data={data} EditTable={EditTable2} />}
                 renderRightHiddenRow={(data, secId, rowId, rowMap) =>
                     <Delete id={data.id} secId={secId} rowId={rowId} rowMap={rowMap} />}
             />
